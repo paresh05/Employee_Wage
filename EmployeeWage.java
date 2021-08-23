@@ -11,29 +11,35 @@ public class EmployeeWage {
 		
 		System.out.println("Welcome to employee wage computation");
 		
-		int WAGE_PER_HR =20; // @param WAGE_PER_HR is used to assign wage per hour
 		int empHrs =0;
         int empWage = 0;
-		
-		double empcheck = Math.floor(Math.random() * 10) % 3;
-		
-		switch((int)empcheck) {
-		case IS_FULL_TIME:
-			empHrs = 8;
-        	empWage = WAGE_PER_HR * empHrs;
-        	break;
-		
-		case IS_Part_Time:
-			empHrs = 4;
-        	empWage = WAGE_PER_HR * empHrs;
-        	break;
+        int workdays = 20;
+        int totalempWage=0;
 
-		default :
-        	empHrs = 0;
-        	empWage = WAGE_PER_HR * empHrs;
-        	break;
+		// Computation
+		for (int i = 1; i <= workdays; i++) {
+			double empcheck = Math.floor(Math.random() * 10) % 3;
+
+			switch ((int) empcheck) {
+			case IS_FULL_TIME: 
+				empHrs = 8;
+				empWage = WAGE_PER_HR * empHrs;
+				break;
+			
+			case IS_Part_Time: 
+				empHrs = 4;
+				empWage = WAGE_PER_HR * empHrs;
+				break;
+			
+			default: 
+				empHrs = 0;
+				empWage = WAGE_PER_HR * empHrs;
+				break;
+
+			}
+			totalempWage += empWage;
 		}
-        System.out.println("Employee Wage is Rs.  " + empWage);
+        System.out.println("Employee Wage per month is Rs.  " + totalempWage);
 
 	}
 

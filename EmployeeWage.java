@@ -17,18 +17,22 @@ public class EmployeeWage {
 		
 		double empcheck = Math.floor(Math.random() * 10) % 3;
 		
-		if (empcheck == IS_FULL_TIME) {
-        	empHrs = 8;
+		switch((int)empcheck) {
+		case IS_FULL_TIME:
+			empHrs = 8;
         	empWage = WAGE_PER_HR * empHrs;
-        }
-		else if (empcheck == IS_Part_Time) {
-        	empHrs = 4;
+        	break;
+		
+		case IS_Part_Time:
+			empHrs = 4;
         	empWage = WAGE_PER_HR * empHrs;
-        }
-        else {
+        	break;
+
+		default :
         	empHrs = 0;
         	empWage = WAGE_PER_HR * empHrs;
-        }
+        	break;
+		}
         System.out.println("Employee Wage is Rs.  " + empWage);
 
 	}

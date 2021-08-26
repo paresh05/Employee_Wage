@@ -6,10 +6,11 @@ class EmpWage
 	public static final int IS_PART_TIME=1;//@param IS_PART_TIME is used to check job status
 	public static final int IS_FULL_TIME=2;// @param IS_FULL_TIME is used to check job status
 
-	public String companyName;
-	public  int empRatePerHour;
-	public  int noOfWorkingDay;
-	public  int maxHrsInaMonth;
+	private String companyName;
+	private  int empRatePerHour;
+	private  int noOfWorkingDay;
+	private  int maxHrsInaMonth;
+	private int totalEmpWage;
 	
 	EmpWage(String companyName, int empRatePerHour, int noOfWorkingDay, int maxHrsInaMonth)
 	{
@@ -39,9 +40,14 @@ class EmpWage
 			totalEmpHrs += empHrs;
 			System.out.println("Day: " + totalWorkingDays + " Emp Hr: " +empHrs);
 		}
-		int totalEmpWage = totalEmpHrs * empRatePerHour;
-		System.out.println("Total Emp Wage: "+ totalEmpWage);
+		totalEmpWage = totalEmpHrs * empRatePerHour;
+		//System.out.println("Total Emp Wage: "+ totalEmpWage);
 		// return totalEmpWage;
+	}
+	
+	@Override
+	public String toString() {
+		return "Total Employee Wage for the company: "+companyName+ " is: "+totalEmpWage;
 	}
 	
 }
@@ -55,12 +61,15 @@ public class EmployeeWage {
 		EmpWage obj3 = new EmpWage("BigBazar",25,15,110);
 		
 		System.out.println("Welcome to Employee Wage Computation Program");
-		System.out.println("Employee Wage of "+obj1.companyName);
+		
 		obj1.compEmpWage();
-		System.out.println("Employee Wage of "+obj2.companyName);
+		System.out.println("Employee Wage of "+obj1);
+		
 		obj2.compEmpWage();
-		System.out.println("Employee Wage of "+obj3.companyName);
+		System.out.println("Employee Wage of "+obj2);
+		
 		obj3.compEmpWage();
+		System.out.println("Employee Wage of "+obj3);
 	}
 
 }

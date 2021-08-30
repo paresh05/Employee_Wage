@@ -6,18 +6,19 @@ import java.util.Map;
 interface IComputeWage {
 	public void addCompanyEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHrsInaMonth);
 	public void computeEmpWage();
+	public int getTotalWage(String company);
 }
 class CompanyEmpWage
 {
-	public String companyName;
+	public String company;
 	public  int empRatePerHour;
 	public  int noOfWorkingDay;
 	public  int maxHrsInaMonth;
 	public  int totalEmpWage;
 	
-	CompanyEmpWage(String companyName, int empRatePerHour, int noOfWorkingDay, int maxHrsInaMonth)
+	CompanyEmpWage(String company, int empRatePerHour, int noOfWorkingDay, int maxHrsInaMonth)
 	{
-		this.companyName=companyName;
+		this.company=company;
 		this.empRatePerHour=empRatePerHour;
 		this.noOfWorkingDay=noOfWorkingDay;
 		this.maxHrsInaMonth=maxHrsInaMonth;
@@ -31,7 +32,7 @@ class CompanyEmpWage
 	
 	@Override
 	public String toString() {
-		return "Total Employee Wage for the company: "+companyName+ " is: "+totalEmpWage;
+		return "Total Employee Wage for the company: "+company+ " is: "+totalEmpWage;
 	}
 	
 }
@@ -41,7 +42,6 @@ public class EmployeeWage implements IComputeWage {
 	public static final int IS_PART_TIME=1;//@param IS_PART_TIME is used to check job status
 	public static final int IS_FULL_TIME=2;// @param IS_FULL_TIME is used to check job status
 	
-	private int numOfCompany=0;
 	private LinkedList<CompanyEmpWage> companyEmpWageList;
 	private Map<String,CompanyEmpWage> companyToEmpWageMap;
 	
@@ -65,7 +65,11 @@ public class EmployeeWage implements IComputeWage {
 			System.out.println(companyEmpWage);
 		}
 	}
-	private int computeEmpWage(CompanyEmpWage companyEmpWage) {
+	@Override
+	public int getTotalWage(String company) {
+		return companyToEmpWageMap.get(company).totalEmpWage;
+	} 
+	public int computeEmpWage(CompanyEmpWage companyEmpWage) {
 		// variables
 		int empHrs=0, totalEmpHrs=0, totalWorkingDays=0;
 		//Computation
@@ -84,7 +88,7 @@ public class EmployeeWage implements IComputeWage {
 			}
 			totalEmpHrs += empHrs;
 			System.out.println("Day: " + totalWorkingDays + " Emp Hr: " +empHrs);
-			System.out.println("Daily Employee Wage for the company: "+companyEmpWage.companyName+" is: "+empHrs*companyEmpWage.empRatePerHour);
+			System.out.println("Daily Employee Wage for the company: "+companyEmpWage.company+" is: "+empHrs*companyEmpWage.empRatePerHour);
 		}
 		return totalEmpHrs*companyEmpWage.empRatePerHour;
 	}
@@ -99,6 +103,7 @@ public class EmployeeWage implements IComputeWage {
 		empWageBuilder.addCompanyEmpWage("BigBasket",26,2,11);
 		System.out.println("Welcome to Employee Wage Computation Program");
 		empWageBuilder.computeEmpWage();
+		System.out.println("Total Wage for Dmart Company: "+empWageBuilder.getTotalWage("DMart"));
 		
 		
 	}

@@ -1,5 +1,9 @@
 package com.bridgelabz2;
 
+interface IComputeWage {
+	public void addCompanyEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHrsInaMonth);
+	public void computeEmpWage();
+}
 class CompanyEmpWage
 {
 	public String companyName;
@@ -29,7 +33,7 @@ class CompanyEmpWage
 	
 }
 
-public class EmployeeWage {
+public class EmployeeWage implements IComputeWage {
 	
 	public static final int IS_PART_TIME=1;//@param IS_PART_TIME is used to check job status
 	public static final int IS_FULL_TIME=2;// @param IS_FULL_TIME is used to check job status
@@ -41,12 +45,12 @@ public class EmployeeWage {
 		companyEmpWageArray=new CompanyEmpWage[3];
 	}
 	
-	private void addCompanyEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHrsInaMonth) {
+	public void addCompanyEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHrsInaMonth) {
 		companyEmpWageArray[numOfCompany]=new CompanyEmpWage(company, empRatePerHour,numOfWorkingDays, maxHrsInaMonth);
 		numOfCompany++;
 	}
 	
-	private void computeEmpWage() {
+	public void computeEmpWage() {
 		for(int i=0;i<numOfCompany;i++)
 		{
 			companyEmpWageArray[i].setTotalEmpWage(this.computeEmpWage(companyEmpWageArray[i]));
@@ -78,7 +82,7 @@ public class EmployeeWage {
 
 	public static void main(String[] args) {
 		
-		EmployeeWage empWageBuilder = new EmployeeWage();
+		IComputeWage empWageBuilder = new EmployeeWage();
 		
 		empWageBuilder.addCompanyEmpWage("Dmart",20,2,10);
 		empWageBuilder.addCompanyEmpWage("Reliance",25,2,12);
